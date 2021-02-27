@@ -1,0 +1,19 @@
+version: '0.2'
+phases:
+  install:
+    runtime-versions:
+      nodejs: 12
+  pre_build:
+    commands:
+      - echo "Prebuild, installing npm dependencies"
+      - npm install
+  build:
+    commands:
+      - echo "Starting the build step"
+      - npm run build
+      - echo "Finished"
+artifacts:
+  name: "BuildOutput"
+  files:
+    - '**/*'
+  base-directory: 'dist'

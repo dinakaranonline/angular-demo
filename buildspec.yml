@@ -10,7 +10,7 @@ phases:
   build:
     commands:
       - echo "Starting the build step"
-      - npm run build
+      - ng build --prod
       - echo "Finished"
 artifacts:
   name: "BuildOutput"

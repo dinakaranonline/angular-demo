@@ -15,10 +15,10 @@ phases:
   post_build:
     commands:
      # Clear out the old contents in the bucket connected to CloudFronts
-     - aws s3 rm s3://angular-demo-2021 --recursive
-     - echo S3 bucket angular-demo-2021 is cleared.
+     - aws s3 rm s3://$BUCKET_NAME --recursive
+     - echo S3 bucket $BUCKET_NAME is cleared.
      # Copy Angular build output (dist) folder to S3 bucket
-     - aws s3 cp dist/angular-demo s3://angular-demo-2021 --recursive
+     - aws s3 cp dist/angular-demo s3://$BUCKET_NAME --recursive
      # Create CloudFront invalidation to clear CloudFront cache
-     - aws cloudfront create-invalidation --distribution-id E9RJXL5EBYNDZ --paths "/*"
+     - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DIST_ID --paths "/*"
      - echo Build completed on `date`

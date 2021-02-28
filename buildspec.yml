@@ -18,7 +18,7 @@ phases:
      - aws s3 rm s3://angular-demo-2021 --recursive
      - echo S3 bucket angular-demo-2021 is cleared.
      # Copy Angular build output (dist) folder to S3 bucket
-     - aws s3 cp dist s3://angular-demo-2021 --recursive
+     - aws s3 cp dist/angular-demo s3://angular-demo-2021 --recursive
      # Create CloudFront invalidation to clear CloudFront cache
      - aws cloudfront create-invalidation --distribution-id E9RJXL5EBYNDZ --paths "/*"
      - echo Build completed on `date`

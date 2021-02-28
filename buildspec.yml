@@ -22,8 +22,3 @@ phases:
      # Create CloudFront invalidation to clear CloudFront cache
      - aws cloudfront create-invalidation --distribution-id E9RJXL5EBYNDZ --paths "/*"
      - echo Build completed on `date`
-artifacts:
-  name: "BuildOutput"
-  files:
-    - '**/*'
-  base-directory: 'dist/angular-demo'

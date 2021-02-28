@@ -8,10 +8,20 @@ phases:
       - echo "Prebuild, installing npm dependencies"
       - npm install
   build:
+   commands:
+     # Builds Angular application
+     - echo Build started on `date`
+     - npm run build    
+  post_build:
     commands:
-      - echo "Starting the build step"
-      - npm run build
-      - echo "Finished"
+     # Clear out the old contents in the bucket connected to CloudFronts
+     - aws s3 rm s3://angular-demo-2021 --recursive
+     - echo S3 bucket angular-demo-2021 is cleared.
+     # Copy Angular build output (dist) folder to S3 bucket
+     - aws s3 cp dist s3://angular-demo-2021 --recursive
+     # Create CloudFront invalidation to clear CloudFront cache
+     - aws cloudfront create-invalidation --distribution-id E9RJXL5EBYNDZ --paths "/*"
+     - echo Build completed on `date`
 artifacts:
   name: "BuildOutput"
   files:
